@@ -1,6 +1,6 @@
 # AI-Powered Leave Request Automation
 
-An end-to-end automation built with **Microsoft Power Automate** and **AI Builder** that classifies free-text leave requests, extracts structured data using AI, logs results, and sends notifications — demonstrating practical experience with the Microsoft Power Platform for business process automation.
+An end-to-end automation built with **Microsoft Power Automate** and **AI Builder** that classifies free text leave requests, extracts structured data using AI, logs results, and sends notifications, demonstrating practical experience with the Microsoft Power Platform for business process automation.
 
 ## What it does
 
@@ -32,19 +32,19 @@ Send Email Notification
 ## Why this design
 
 - **AI-driven classification** removes the need for employees to fill out rigid dropdown forms — they can describe their request naturally.
-- **Dynamic date handling**: the prompt is fed the *actual current date* via a Power Automate expression (`formatDateTime(utcNow(),'yyyy-MM-dd')`), so relative phrases like "next Friday" resolve correctly every time the flow runs — rather than relying on a hardcoded date.
+- **Dynamic date handling**: the prompt is fed the *actual current date* via a Power Automate expression (`formatDateTime(utcNow(),'yyyy-MM-dd')`), so relative phrases like "next Friday" resolve correctly every time the flow runs, rather than relying on a hardcoded date.
 - **Structured JSON output**: the AI is explicitly instructed to return raw JSON with no markdown formatting, so it can be reliably parsed and used in downstream steps.
 
 ## What I'd add with more time / licensing
 
-- **Microsoft Forms** as the intake method (built and tested, but blocked by a Forms license limitation on the trial tenant used for this project)
+- **Microsoft Forms** as the intake method 
 - **SharePoint or Dataverse** as the storage layer instead of OneDrive files, for better queryability
-- **Copilot Studio agent** as a conversational front-end, so employees could submit requests via chat rather than a form
-- **Approval step** with Teams adaptive cards for manager sign-off
+- **Copilot Studio agent** as a conversational frontend, so employees could submit requests via chat rather than a form
+- **Approval step** with Teams adaptive cards for manager signoff
 
 ## Notes on this build
 
-This project was built on a free Microsoft 365 Developer trial tenant, which has limited AI Builder credits for **live flow execution** (separate from the unlimited credits available for testing/building prompts directly in the AI Builder studio). The AI classification logic was independently validated and confirmed working correctly (see `screenshots/ai-test-result.png`), returning accurate structured output such as:
+This project was built on a free Microsoft 365 Developer trial tenant, which has limited AI Builder credits for **live flow execution** (separate from the unlimited credits available for testing/building prompts directly in the AI Builder studio). The AI classification logic was independently validated and confirmed working correctly (see `screenshots/02-ai-test-result.png`), returning accurate structured output such as:
 
 ```json
 {
@@ -54,27 +54,34 @@ This project was built on a free Microsoft 365 Developer trial tenant, which has
 }
 ```
 
-A full end-to-end flow run may show a credit-capacity error on this trial tenant; this reflects a licensing/quota constraint of the free trial environment rather than a fault in the flow's logic, which is fully built and saved.
+A full end-to-end flow run may show a credit capacity error on this trial tenant; this reflects a licensing/quota constraint of the free trial environment rather than a fault in the flow's logic, which is fully built and saved.
 
 ## Screenshots
 
 **Flow overview** — full 5-step automation from trigger to email notification
+
 ![Flow overview](screenshots/01-flow-overview.png)
 
 **AI classification test** — AI Builder correctly extracting request type, date, and reason from free text
+
 ![AI test result](screenshots/02-ai-test-result.png)
 
 **Parse JSON step** — schema generated to structure the AI's response for downstream use
+
 ![Parse JSON schema](screenshots/03-parse-json-schema.png)
 
 **OneDrive storage step** — each request logged as a timestamped file for audit tracking
+
 ![OneDrive file step](screenshots/04-onedrive-file-step.png)
 
 **Email notification step** — automatic summary email sent on each new request
+
 ![Email notification step](screenshots/05-email-notification-step.png)
 
-**Run history** — flow execution log showing step-by-step status
-![Run history](screenshots/06-run-history.png)
+**Test-result** — full flow execution log; each step completed successfully up to the AI Builder step
+
+![Run test](screenshots/06-run-test.png)
+
 
 ## Tools used
 
